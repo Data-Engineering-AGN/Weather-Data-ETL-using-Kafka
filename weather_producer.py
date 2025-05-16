@@ -23,4 +23,4 @@ try:
         print(f"Sent to [{topic}]:", row)
         time.sleep(random.uniform(1, 3))
 except KeyboardInterrupt:
-    print("Stopped sending data.")
+    print("Stopped sending data")
