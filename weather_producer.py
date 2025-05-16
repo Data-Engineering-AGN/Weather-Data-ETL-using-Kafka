@@ -5,7 +5,7 @@ from kafka import KafkaProducer
 import json
 
 # Load CSV
-df = pd.read_csv("data/weather.csv")
+df = pd.read_csv("data/weather.csv")  # or use the uploaded file path if running locally
 
 # Kafka Producer
 producer = KafkaProducer(
@@ -13,12 +13,14 @@ producer = KafkaProducer(
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
-# Infinite loop to send random rows
+# Infinite loop to send random rows to country-specific topics
 try:
     while True:
         row = df.sample(1).to_dict(orient="records")[0]
-        producer.send('weather-data', row)
-        print("Sent:", row)
-        time.sleep(random.uniform(1, 3))  # sleep 1 to 3 seconds randomly
+        country = row.get("Country", "unknown").lower().replace(" ", "_")
+        topic = f"{country}_weather"
+        producer.send(topic, row)
+        print(f"Sent to [{topic}]:", row)
+        time.sleep(random.uniform(1, 3))
 except KeyboardInterrupt:
     print("Stopped.")
