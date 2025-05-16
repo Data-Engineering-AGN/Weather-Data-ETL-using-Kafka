@@ -3,7 +3,7 @@ import json
 
 consumer = KafkaConsumer(
     'weather-data',
-    bootstrap_servers='10.20.144.28:9092',
+    bootstrap_servers='**.**.***.**:9092',
     auto_offset_reset='earliest',
     value_deserializer=lambda x: json.loads(x.decode('utf-8'))
 )
