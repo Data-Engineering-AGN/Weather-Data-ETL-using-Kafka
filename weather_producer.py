@@ -9,7 +9,7 @@ df = pd.read_csv("data/weather.csv")
 
 # Kafka Producer
 producer = KafkaProducer(
-    bootstrap_servers='10.**.****.**:9092',
+    bootstrap_servers='**.**.****.**:9092',
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
