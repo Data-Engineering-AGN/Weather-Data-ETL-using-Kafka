@@ -13,7 +13,12 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 consumer = KafkaConsumer(
+<<<<<<< HEAD
     bootstrap_servers='10.20.144.28:9092',
+=======
+    'weather-data',
+    bootstrap_servers='**.**.***.**:9092',
+>>>>>>> 3ee4c222789c7a1d3e4db95d71325efdd860805d
     auto_offset_reset='earliest',
     value_deserializer=lambda x: json.loads(x.decode('utf-8'))
 )

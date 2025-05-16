@@ -118,6 +118,8 @@ This project mimics a real-world IoT + big data ETL setup for scenarios like:
 
 For any questions, feel free to open an issue or reach out via the repository.
 
+Venkat Nikhil Chimata
+
 ---
 
 ## 📌 Screenshots
