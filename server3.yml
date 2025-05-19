@@ -1,0 +1,11 @@
+services:
+  kafka3:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka3
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: 10.20.144.28:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.21.168.19:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
