@@ -12,21 +12,23 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
+topics_list = ["australia_weather", "turkey_weather", "south_africa_weather"]
 consumer = KafkaConsumer(
-    bootstrap_servers='**.**.***.**:9092',
+    *topics_list,
+    bootstrap_servers='10.20.31.246:9092',
     auto_offset_reset='earliest',
     value_deserializer=lambda x: json.loads(x.decode('utf-8'))
 )
 
 # Subscribe to all topics that start with 'weather-'
-consumer.subscribe(pattern='^.*_weather$')
+#consumer.subscribe(pattern='^.*_weather$')
 
 # Define mapping between country and table name
 country_table_map = {
     'Australia': 'weather_australia',
     'Turkey': 'weather_turkey',
     'South Africa': 'weather_south_africa',
-    'USA': 'weather_usa',
+   'USA': 'weather_usa',
     'Spain': 'weather_spain'
 }
 
