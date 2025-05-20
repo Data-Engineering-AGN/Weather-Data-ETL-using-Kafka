@@ -19,7 +19,7 @@ This project simulates a real-time weather data streaming pipeline using Apache 
 ---
 ## Flowcharts
 
-![WhatsApp Image 2025-05-20 at 14 17 22_65b61eb3](https://github.com/user-attachments/assets/1004a410-0798-4abd-97dc-c0da61b358ee)
+![image](https://github.com/user-attachments/assets/e857eda1-a07e-491f-a034-0fea54ba62d4)
 
 ---
 
