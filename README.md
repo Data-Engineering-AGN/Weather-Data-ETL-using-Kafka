@@ -2,15 +2,22 @@
 
 This project simulates a real-time weather data streaming pipeline using Apache Kafka, designed to emulate IoT sensors that continuously transmit weather metrics such as temperature, humidity, and pressure. The architecture is built for scalability, fault tolerance, and parallelism using a multi-node Kafka setup and country-wise topic segmentation. The streamed data is ingested and stored in a PostgreSQL database, forming the foundation for downstream analytics, visualization, or machine learning applications.
 
+---
+
 ## Project Overview
 
-- **Producers** simulate weather sensors generating data like temperature, humidity, and pressure for different countries.
-- **Multi-node Kafka cluster** ensures scalable and fault-tolerant message streaming.
-- **Country-wise Kafka topics** allow organized and parallel data processing.
-- **Consumers** listen to respective country topics and store parsed data into a **PostgreSQL data warehouse**.
+- **Producers**: Python-based Kafka producers read from a CSV (simulating real-time sensor data) and send randomized weather updates to country-specific Kafka topics. Each record includes attributes such as temperature, humidity, pressure, timestamp, and country.
+
+- **Kafka Cluster**: A multi-node Kafka setup (configured via Docker Compose) ensures scalable, high-throughput, and fault-tolerant message streaming. Kafka topics are logically divided by country, enabling parallel data pipelines for different regions.
+
+- **Consumers**: Kafka consumers are implemented in Python to subscribe to individual country topics, parse weather data in real time, and persist the data into a PostgreSQL database. Each consumer handles only one country, allowing easy horizontal scaling.
+
+- **PostgreSQL Data Store**: The consumers write structured weather data into country-specific tables in PostgreSQL. This schema is optimized for analytical querying and future integration with BI tools.
+
+- **ETL Pipeline**: Effectively acts as an end-to-end ETL pipeline—from simulated sensor data (Extract), real-time parsing and filtering (Transform), to structured storage in PostgreSQL (Load).
 
 ---
-# Flowcharts
+## Flowcharts
 
 ![WhatsApp Image 2025-05-20 at 14 17 22_65b61eb3](https://github.com/user-attachments/assets/1004a410-0798-4abd-97dc-c0da61b358ee)
 
@@ -18,11 +25,15 @@ This project simulates a real-time weather data streaming pipeline using Apache 
 
 ## Technologies Used
 
-- Python
-- Apache Kafka (multi-node cluster)
-- PostgreSQL
-- Kafka-Python (Producer & Consumer APIs)
-- Docker / Docker Compose (for setting up Kafka and Postgres)
+- **Apache Kafka**: Real-time distributed streaming platform
+
+- **Docker & Docker Compose**: Containerized deployment of Kafka (multi-node), Zookeeper, and PostgreSQL
+
+- **Python**: Kafka Producers and Consumers (using kafka-python)
+
+- **PostgreSQL**: Relational database to store ingested weather data
+
+- **SQL**: Table creation and query scripts for storage and analysis
 
 
 ---
@@ -39,14 +50,27 @@ This project simulates a real-time weather data streaming pipeline using Apache 
 ## Project Structure
 
 ```
-weather-data-etl/
+Weather-Data-ETL-using-Kafka/
 │
-├── kafka_producer.py          # Simulates weather sensors, sends data to Kafka topics
-├── kafka_consumer.py          # Consumes messages and writes them into PostgreSQL
-├── weather.csv                # Sample source for simulated data
-├── docker-compose.yml         # Spins up multi-node Kafka and Postgres
-├── requirements.txt           # Python dependencies
-└── README.md
+├── data/
+│   └── weather.csv                # Simulated IoT sensor weather data
+│
+├── server1.yml                    # Docker Compose file for Kafka Node 1
+├── server2.yml                    # Docker Compose file for Kafka Node 2
+├── server3.yml                    # Docker Compose file for Kafka Node 3
+│
+├── weather_producer.py           # Python script to simulate weather data producer
+├── weather_consumer1.py          # Kafka consumer for selected countries
+├── weather_consumer2.py          # Additional Kafka consumer for scaling
+│
+├── create_postgres_schema.py     # Python script to create PostgreSQL tables
+│
+├── requirements.txt              # Python dependencies for producer and consumer
+├── docker commands.txt           # Useful Docker CLI commands and references
+│
+├── .gitignore                    # Files/folders to exclude from version control
+├── README.md                     # Project documentation
+└── .DS_Store                     # (System file, safe to ignore or delete)
 ```
 
 ---
@@ -74,31 +98,8 @@ weather-data-etl/
 
 PostgreSQL table example:
 
-```sql
-CREATE TABLE weather_data (
-    id SERIAL PRIMARY KEY,
-    country VARCHAR(50),
-    temperature FLOAT,
-    humidity FLOAT,
-    pressure FLOAT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 ```
-
----
-
-## Sample Output (Terminal)
-
-### Producer Output
-```
-Published to topic: weather-india => {"country": "India", "temperature": 32.5, "humidity": 70, "pressure": 1012}
-Published to topic: weather-usa => {"country": "USA", "temperature": 24.3, "humidity": 60, "pressure": 1015}
-```
-
-### Consumer Output
-```
-Received: {'country': 'India', 'temperature': 32.5, 'humidity': 70, 'pressure': 1012}
-Inserted into PostgreSQL: India | 32.5°C | 70% | 1012 hPa
+{'MinTemp': 'FLOAT', 'MaxTemp': 'FLOAT', 'Rainfall': 'FLOAT', 'Evaporation': 'FLOAT', 'Sunshine': 'FLOAT', 'WindGustDir': 'TEXT', 'WindGustSpeed': 'FLOAT', 'WindDir9am': 'TEXT', 'WindDir3pm': 'TEXT', 'WindSpeed9am': 'FLOAT', 'WindSpeed3pm': 'INTEGER', 'Humidity9am': 'INTEGER', 'Humidity3pm': 'INTEGER', 'Pressure9am': 'FLOAT', 'Pressure3pm': 'FLOAT', 'Cloud9am': 'INTEGER', 'Cloud3pm': 'INTEGER', 'Temp9am': 'FLOAT', 'Temp3pm': 'FLOAT', 'RainToday': 'TEXT', 'RISK_MM': 'FLOAT', 'RainTomorrow': 'TEXT', 'City': 'TEXT', 'Country': 'TEXT', 'Coordinates': 'TEXT'}
 ```
 
 ---
