@@ -1,8 +1,8 @@
 # Weather Data ETL Using Kafka
 
-This project simulates real-time weather data transmission using Apache Kafka, emulating IoT sensors sending continuous updates. A multi-node Kafka setup streams data into country-wise topics, and consumers ingest and store the data into a PostgreSQL database for downstream analytics and reporting.
+This project simulates a real-time weather data streaming pipeline using Apache Kafka, designed to emulate IoT sensors that continuously transmit weather metrics such as temperature, humidity, and pressure. The architecture is built for scalability, fault tolerance, and parallelism using a multi-node Kafka setup and country-wise topic segmentation. The streamed data is ingested and stored in a PostgreSQL database, forming the foundation for downstream analytics, visualization, or machine learning applications.
 
-## 🚀 Project Overview
+## Project Overview
 
 - **Producers** simulate weather sensors generating data like temperature, humidity, and pressure for different countries.
 - **Multi-node Kafka cluster** ensures scalable and fault-tolerant message streaming.
@@ -10,8 +10,13 @@ This project simulates real-time weather data transmission using Apache Kafka, e
 - **Consumers** listen to respective country topics and store parsed data into a **PostgreSQL data warehouse**.
 
 ---
+# Flowcharts
 
-## 🛠️ Technologies Used
+![WhatsApp Image 2025-05-20 at 14 17 22_65b61eb3](https://github.com/user-attachments/assets/1004a410-0798-4abd-97dc-c0da61b358ee)
+
+---
+
+## Technologies Used
 
 - Python
 - Apache Kafka (multi-node cluster)
@@ -19,9 +24,19 @@ This project simulates real-time weather data transmission using Apache Kafka, e
 - Kafka-Python (Producer & Consumer APIs)
 - Docker / Docker Compose (for setting up Kafka and Postgres)
 
+
 ---
 
-## 📁 Project Structure
+## Key Features
+- Simulated real-time ingestion from weather sensors
+- Country-wise topic partitioning for organized streaming
+- Multi-node Kafka deployment for reliability and scalability
+- PostgreSQL-based persistent storage with country-level schema separation
+- Modular ETL architecture suitable for real-time analytics or downstream ML pipelines
+
+---
+
+## Project Structure
 
 ```
 weather-data-etl/
@@ -36,7 +51,7 @@ weather-data-etl/
 
 ---
 
-## 🧪 How It Works
+## How It Works
 
 1. **Start Kafka & Postgres** using Docker Compose:
    ```bash
@@ -55,7 +70,7 @@ weather-data-etl/
 
 ---
 
-## 🗃️ Database Schema
+## Database Schema
 
 PostgreSQL table example:
 
@@ -72,7 +87,7 @@ CREATE TABLE weather_data (
 
 ---
 
-## 📸 Sample Output (Terminal)
+## Sample Output (Terminal)
 
 ### Producer Output
 ```
@@ -88,18 +103,17 @@ Inserted into PostgreSQL: India | 32.5°C | 70% | 1012 hPa
 
 ---
 
-## 📌 Use Case
+## Use Case
 
 This project mimics a real-world IoT + big data ETL setup for scenarios like:
 
-- Weather monitoring systems
-- Smart city dashboards
-- Real-time analytics pipelines
-- Data warehousing for climate data
+- **Agriculture advisory system:** Farmers get alerts based on humidity and rainfall.
+- **Smart city traffic/weather routing:** Integrate with traffic simulation data for route planning.
+- **Disaster response simulation:** Create a reactive system for storm or flood warnings.
 
 ---
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository:
    ```bash
@@ -114,14 +128,15 @@ This project mimics a real-world IoT + big data ETL setup for scenarios like:
 
 ---
 
-## 📞 Contact
+## Contact
 
 For any questions, feel free to open an issue or reach out via the repository.
 
-Venkat Nikhil Chimata
+**Abhishek Prasanna Walavalkar** (abhishek.walavalkar13@gmail.com)  [**(Linkedin)**](https://www.linkedin.com/in/abhishek-walavalkar-777130147/)
+
+**Gandhar Ravindra Pansare** (gandharpansare@gmail.com)  [**(Linkedin)**](https://www.linkedin.com/in/gandharpansare/)
+
+**Venkat Nikhil Chimata** () [**(Linkedin)**](
 
 ---
 
-## 📌 Screenshots
-
-_(Leave space to insert screenshots later if needed)_
