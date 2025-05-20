@@ -137,7 +137,7 @@ For any questions, feel free to open an issue or reach out via the repository.
 
 **Gandhar Ravindra Pansare** (gandharpansare@gmail.com)  [**(Linkedin)**](https://www.linkedin.com/in/gandharpansare/)
 
-**Venkat Nikhil Chimata** () [**(Linkedin)**](
+**Venkat Nikhil Chimata** (venkatnikhil1018@gmail.com) [**(Linkedin)**](https://www.linkedin.com/in/nikhil-chimata/)
 
 ---
 
